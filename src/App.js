@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { DataContextProvider } from "./context/dataContext";
+
+import Maincontainer from "./components/Maincontainer";
+import VideoFrame from "./components/VideoFrame";
+import EditCard from "./components/EditCard";
+import History from "./components/History";
+import AddCard from "./components/AddCard";
+import NavBar from "./components/Navbar";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataContextProvider>
+      <BrowserRouter >
+        <div className="App">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Maincontainer />} />
+            <Route path="/add" element={<AddCard />} />
+            <Route path="/view/:id" element={<VideoFrame />} />
+            <Route path="/edit" element={<EditCard />} />
+            <Route path="/history" element={<History/>} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </DataContextProvider>
   );
 }
 
